@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RGM College Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e3f2fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      text-align: center;
+    }
+
+    .college-logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      color: #0d47a1;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #0d47a1;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+   <img src="rgm.jpg" width="100px" alt="rgm">
+    <h2>RGM College Login</h2>
+    <div class="subtitle">Rajeev Gandhi Memorial College of Engineering and Technology</div>
+    <input type="text" id="username" placeholder="Enter Username">
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="validateLogin()">Login</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      const validIDs = new Set();
+
+      // Add 22091A0500 to 22091A0599
+      for (let i = 0; i <= 99; i++) {
+        validIDs.add(`22091A05${i.toString().padStart(2, '0')}`);
+      }
+
+      // Add 22091A5A0 to 22091A5K3 (A0-A9, B0-B9, ..., K0-K3)
+      const letters = ['A','B','C','D','E','F','G','H','I','J','K'];
+      for (let l of letters) {
+        for (let j = 0; j <= 9; j++) {
+          validIDs.add(`22091A5${l}${j}`);
+        }
+      }
+      // K0-K3
+      for (let j = 0; j <= 3; j++) {
+        validIDs.add(`22091A5K${j}`);
+      }
+
+      // Add 23095A0501 to 23095A0530
+      for (let i = 1; i <= 30; i++) {
+        validIDs.add(`23095A05${i.toString().padStart(2, '0')}`);
+      }
+
+      if (validIDs.has(username) && username === password) {
+        window.location.href = "index9.html";
+      } else {
+        errorMsg.textContent = "Invalid username or password.";
+      }
+    }
+  </script>
+</body>
+</html>
